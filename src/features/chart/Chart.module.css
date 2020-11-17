@@ -1,0 +1,23 @@
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row:not(:last-child) {
+  margin-bottom: 16px;
+}
+
+.header {
+  position: relative;
+  margin: 10px;
+  border: 2px gray solid;
+  border-radius: 1%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.header__text {
+}
+
+.header__label {
+}
