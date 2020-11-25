@@ -22,7 +22,9 @@ Here is the [API specification](api-spec.md) that the web application should con
 
 Below is the user interface we will develop. We are using React as our frontend framework. You will need to fill out javascript functions, implement css and build a react component to complete the UI to spec. **The final product should match the image below.**
 
-To run the react app, use `npm start`. The app is served on `http://localhost:3000`.
+First, ensure your `npm` is up to date (`npm install -g npm`) and install the package dependencies: `npm install`.
+
+Then, to run the react app, use `npm start`. The app is served on `http://localhost:3000`.
 
 ![Image of User Interface](user-interface.png)
 
