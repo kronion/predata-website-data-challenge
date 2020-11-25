@@ -37,6 +37,8 @@ export const fetchChartData = language => {
 
 export const selectData = state => state.chart.data;
 
+const sum = numbers => _.reduce(numbers, (a, b) => a + b, 0);
+
 /**
  * Group total websites views by language.
  *
@@ -52,8 +54,24 @@ export const selectData = state => state.chart.data;
 export const groupByLanguage = createSelector(
   [selectData, getSelectedLanguages],
   (data, languages) => {
-    // TODO: Implement
-    return;
+    const language_names = languages.map(({name}) => name)
+    const language_counts = _.flatten(
+      data
+        // sum views *once* per website
+        .map(website => ({...website, views: sum(website.website_views.map(({count}) => parseInt(count)))}))
+        // explode each tag of each website (discarding *which* website it came from)
+        .map(website => website.tags.map(tag => ({language: tag.name, views: website.views})))
+    );
+    const language_groups = _.groupBy(
+      language_counts
+        // filter down to selected languages
+        .filter(count => language_names.includes(count.language)),
+      'language'
+    );
+    return _.map(
+      language_groups,
+      (group, language) => ({language, views: sum(group.map(({views}) => views))})
+    );
   }
 );
 
