@@ -52,8 +52,8 @@ def list_website():
     Returns:
         All filtered websites.
     """
-    # TODO: implement
-    pass
+    # FIXME: probably gonna need pagination at some point...
+    return jsonify(Website.query.all())
 
 
 @app.route("/tag", methods=["POST"])
@@ -64,8 +64,12 @@ def create_tag():
     Returns:
         The created tag.
     """
-    # TODO: implement
-    pass
+    name = request.form.get("name")
+    tag = Tag(name=name)
+    db.session.add(tag)
+    db.session.commit()
+    # FIXME: ensure this returns HTTP 201
+    return jsonify(tag)
 
 
 @app.route("/tag/<id>")
@@ -79,8 +83,7 @@ def get_tag(id):
     Returns:
         The tag.
     """
-    # TODO: implement
-    pass
+    return jsonify(Tag.query.get(id))
 
 
 @app.route("/tags")
@@ -91,8 +94,8 @@ def list_tags():
     Returns:
         All tags.
     """
-    # TODO: implement
-    pass
+    # FIXME: pagination (see list_website above)
+    return jsonify(Tag.query.all())
 
 
 @app.route("/website/<website_id>/tag/<tag_id>", methods=["PUT"])
@@ -108,8 +111,15 @@ def add_tag_to_website(website_id, tag_id):
         The updated website.
 
     """
-    # TODO: implement
-    pass
+    website = Website.query.get(website_id)
+    tag = Tag.query.get(tag_id)
+    # TODO: avoid race condition? off the top of my head I'm not sure what SQLAlchemy
+    # will do if multiple threads try to add different tags to the same website
+    # simultaneously (Probably premature optimization for now though lol)
+    website.tags.append(tag)
+    db.session.add(website)
+    db.session.commit()
+    return jsonify(website)
 
 
 @app.route("/health")
