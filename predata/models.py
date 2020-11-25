@@ -1,9 +1,11 @@
-from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
 from dataclasses import dataclass
-from app.flask import app
 from typing import List
 import json
+
+from flask import Flask, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
+
+from .app import app
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///../website.db"
 db = SQLAlchemy(app)

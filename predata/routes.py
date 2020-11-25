@@ -1,10 +1,12 @@
 import json
 import os
+
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from models import db, Tag
-from .flask import app
-from models import Website, db, Tag
+
+from .app import app
+
+from .models import Website, db, Tag
 
 
 @app.route("/website", methods=["POST"])
