@@ -14,7 +14,13 @@
 }
 
 .time_series__header {
+  margin: 100px;
+  text-align: center;
+  font-size: 150%;
 }
 
 .time_series__chart_row {
+  margin: 100px;
+  display: flex;
+  justify-content: space-around;
 }

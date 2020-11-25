@@ -9,6 +9,7 @@
 }
 
 .header {
+  /* TBD: should this be a <fieldset>? */
   position: relative;
   margin: 10px;
   border: 2px gray solid;
@@ -17,7 +18,16 @@
 }
 
 .header__text {
+  margin: 25px;
+  text-align: center;
+  font-size: 200%;
+  font-weight: bold;
 }
 
 .header__label {
+  position: absolute;
+  top: -1em;
+  left: 1em;
+  padding: 5px;
+  background: white;
 }

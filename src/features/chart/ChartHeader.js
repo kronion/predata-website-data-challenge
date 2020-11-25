@@ -1,5 +1,9 @@
 import React from "react";
-// import styles from "./Chart.module.css";
+import styles from "./Chart.module.css";
 
-// TODO: Implement
-export const ChartHeader = ({ text }) => <div />;
+export const ChartHeader = ({ text }) => (
+  <div className={styles.header}>
+    <div className={styles.header__text}>{text}</div>
+    <label className={styles.header__label}>Title</label>
+  </div>
+);
