@@ -52,8 +52,17 @@ def list_website():
     Returns:
         All filtered websites.
     """
+    q = Website.query
+    # TODO: check with mgmt whether no "tags" param implies all or none
+    if tag_names_csv := request.args.get("tags"):
+        tag_names = tag_names_csv.split(",")
+        tags = Tag.query.filter(Tag.name.in_(tag_names)).all()
+        # FIXME: there's probably a more idiomatic way to do this with SQLAlchemy
+        # but the obvious way results with a "in_() not yet supported for relationships"
+        tag_ids = [tag.id for tag in tags]
+        q = q.filter(Website.tags.any(Tag.id.in_(tag_ids)))
     # FIXME: probably gonna need pagination at some point...
-    return jsonify(Website.query.all())
+    return jsonify(q.all())
 
 
 @app.route("/tag", methods=["POST"])
