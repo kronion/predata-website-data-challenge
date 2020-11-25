@@ -14,7 +14,9 @@ Implement:
 
 To implement the REST interface, fill out the missing code in `api/app/routes.py`. We are using `flask` as our web framework. We are using `SQLAlchemy` with an in-memory `sqlite` database. The database already contains some data and has been provided alongside the code in `website.db`. We will be using `conda` to manage our python dependencies and environment. Use the `website.yml` file to create the python virtual environment by running `conda env create -f website.yml -n website` and `conda activate website`.
 
-To boot the starter code run `FLASK_APP=api/app/routes.py flask run` on the command line.
+To use plain old pip to manage dependencies instead, run `pip install -r requirements.txt`.
+
+To boot the starter code run `FLASK_ENV=development FLASK_APP=api/app/routes.py flask run` on the command line.
 
 Here is the [API specification](api-spec.md) that the web application should conform to.
 
